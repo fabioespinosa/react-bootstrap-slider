@@ -1,11 +1,11 @@
 {
   "name": "react-bootstrap-slider",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "dist/react-bootstrap-slider.js",
   "description": "Bootstrap Slider component for React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/brownieboy/react-bootstrap-slider.git"
+    "url": "https://github.com/fabioespinosa/react-bootstrap-slider.git"
   },
   "keywords": [
     "react-component",
@@ -15,7 +15,7 @@
     "bootstrap"
   ],
   "bugs": {
-    "url": "https://github.com/brownieboy/react-bootstrap-slider/issues"
+    "url": "https://github.com/fabioespinosa/react-bootstrap-slider/issues"
   },
   "author": "Michael Brown <brownieboy@gmail.com>",
   "license": "MIT",
