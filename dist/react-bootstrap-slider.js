@@ -20,23 +20,16 @@
   _react = _interopRequireDefault(_react);
   _propTypes = _interopRequireDefault(_propTypes);
   _bootstrapSlider = _interopRequireDefault(_bootstrapSlider);
-
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+  function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+  function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+  function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
+  function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); } /* eslint-env browser */
   class ReactBootstrapSlider extends _react.default.Component {
-    constructor(...args) {
-      super(...args);
-
+    constructor() {
+      super(...arguments);
       _defineProperty(this, "checkAndDoDisabled", () => {
         const sliderEnable = this.props.disabled !== "disabled";
         const currentlyEnabled = this.mySlider.isEnabled();
-
         if (sliderEnable) {
           if (!currentlyEnabled) {
             this.mySlider.enable();
@@ -47,35 +40,31 @@
           }
         }
       });
-
       _defineProperty(this, "updateSliderValues", () => {
         if (typeof this.props.min !== "undefined" && (typeof this.mySlider.min !== "undefined" || typeof this.mySlider.options.min !== "undefined")) {
           this.mySlider.setAttribute("min", this.props.min);
         }
-
         if (typeof this.props.max !== "undefined" && (typeof this.mySlider.max !== "undefined" || typeof this.mySlider.options.max !== "undefined")) {
           this.mySlider.setAttribute("max", this.props.max);
         }
-
         if (typeof this.props.step !== "undefined" && (typeof this.mySlider.step !== "undefined" || typeof this.mySlider.options.step !== "undefined")) {
           this.mySlider.setAttribute("step", this.props.step);
         }
-
         this.mySlider.setValue(this.props.value);
         this.checkAndDoDisabled();
       });
     }
-
     componentDidMount() {
       const that = this;
-
-      const sliderAttributes = _objectSpread(_objectSpread({}, this.props), {}, {
+      const sliderAttributes = {
+        ...this.props,
         tooltip: this.props.tooltip || "show"
-      }); // console.log("sliderAttributes = " + JSON.stringify(sliderAttributes, null, 4));
+      };
+      // console.log("sliderAttributes = " + JSON.stringify(sliderAttributes, null, 4));
 
+      this.mySlider = new _bootstrapSlider.default(this.node, sliderAttributes);
 
-      this.mySlider = new _bootstrapSlider.default(this.node, sliderAttributes); //     this.updateSliderValues();
-
+      //     this.updateSliderValues();
       if (this.props.change || this.props.handleChange) {
         const changeEvent = this.props.change || this.props.handleChange;
         this.mySlider.on("change", e => {
@@ -87,7 +76,6 @@
           changeEvent(fakeEvent);
         });
       }
-
       if (this.props.slideStop) {
         this.mySlider.on("slideStop", e => {
           const fakeEvent = {
@@ -98,18 +86,14 @@
           that.props.slideStop(fakeEvent);
         });
       }
-
       this.checkAndDoDisabled();
     }
-
     componentDidUpdate() {
       this.updateSliderValues();
     }
-
     componentWillUnmount() {
       this.mySlider.destroy();
     }
-
     render() {
       // The slider"s an input.  That"s all we need.  We"ll do the rest in
       // the componentDidMount() method.
@@ -117,9 +101,7 @@
         ref: node => this.node = node
       });
     }
-
   }
-
   _exports.ReactBootstrapSlider = ReactBootstrapSlider;
   ReactBootstrapSlider.propTypes = {
     min: _propTypes.default.number,
@@ -133,6 +115,5 @@
     slideStop: _propTypes.default.func,
     labelledby: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.arrayOf(_propTypes.default.string)])
   };
-  var _default = ReactBootstrapSlider;
-  _exports.default = _default;
+  var _default = _exports.default = ReactBootstrapSlider;
 });
